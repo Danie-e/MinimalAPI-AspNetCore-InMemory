@@ -54,5 +54,15 @@ app.MapPut("/Produto/{id}", async (Context db, int id, Produto produto) =>
     }
 });
 
+app.MapDelete("/Produto/{id}", async (Context db, int id) =>
+{
+    if (await db.Produtos.FindAsync(id) is Produto produto)
+    {
+        db.Produtos.Remove(produto);
+        await db.SaveChangesAsync();
+        return Results.Ok();
+    }
+    else return Results.NotFound();
+});
 
 app.Run();
