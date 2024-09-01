@@ -10,23 +10,30 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
 
-app.MapGet("/Produtos", async (Context db) =>
+app.MapGet("/Produto", async (Context db) =>
 await db.Produtos.ToListAsync<Produto>()
 );
 
-app.MapGet("/Produtos/EmEstoque", async (Context db) =>
+app.MapGet("/Produto/EmEstoque", async (Context db) =>
 await db.Produtos.Where(p => p.quatidadeEmEstoque >= 1).ToListAsync<Produto>()
 );
 
-app.MapGet("/Produtos/ForaDeEstoque", async (Context db) =>
+app.MapGet("/Produto/ForaDeEstoque", async (Context db) =>
 await db.Produtos.Where(p => p.quatidadeEmEstoque == 0).ToListAsync<Produto>()
 );
 
-app.MapGet("/Produtos/{id}", async (Context db, int id) =>
+app.MapGet("/Produto/{id}", async (Context db, int id) =>
     await db.Produtos.FindAsync(id)
     is Produto produto
     ? Results.Ok(produto)
     : Results.NotFound()
 );
+
+app.MapPost("/Produto", async (Context db, Produto produto) =>
+{
+    db.Produtos.Add(produto);
+    await db.SaveChangesAsync();
+    return Results.Created($"/Produtos/{produto.id}", produto);
+});
 
 app.Run();
