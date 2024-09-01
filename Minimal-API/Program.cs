@@ -36,4 +36,23 @@ app.MapPost("/Produto", async (Context db, Produto produto) =>
     return Results.Created($"/Produtos/{produto.id}", produto);
 });
 
+app.MapPut("/Produto/{id}", async (Context db, int id, Produto produto) =>
+{
+    Produto produtoDb = await db.Produtos.FindAsync(id);
+    if (produtoDb is null) return Results.NotFound();
+    else
+    {
+        produtoDb.nome = produto.nome;
+        produtoDb.codigo = produto.codigo;
+        produtoDb.preco = produto.preco;
+        produtoDb.descricao = produto.descricao;
+        produtoDb.categoria = produto.categoria;
+
+        await db.SaveChangesAsync();
+
+        return Results.NoContent();
+    }
+});
+
+
 app.Run();
