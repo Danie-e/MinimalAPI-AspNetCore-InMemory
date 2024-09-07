@@ -1,13 +1,13 @@
 # API-AspNetCore-InMemory
 
-Aplicação desenvolvida para a atividade Introdução à APIs com C# da matéria Tecnologias para Análise e Desenvolvimento de Sistemas - G1/T1 - 4ºP/40H - 2024/2.  
+Aplicação desenvolvida para a atividade 'Criação de uma API mínima' da matéria Tecnologias para Análise e Desenvolvimento de Sistemas - G1/T1 - 4ºP/40H - 2024/2.  
 
 API InMemory é utilizada quando não se tem acesso ao banco de dados, o InMemory pode ser usado de forma temporária para moldar a API agilizando o processo de desenvolvimento, facilitando testes individuais ou em projetos conceituais. 
 
 
 ## Requisitos  
 
-Ser baseado no objeto Usuario com os seguintes atributos:   
+Ser baseado no objeto Produto com os seguintes atributos:   
 - Nome;
 - Código;
 - Preço;
